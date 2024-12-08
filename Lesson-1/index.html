@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJs</title>
+    <style>
+        .region-1 {
+            border: 1px dashed red;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .region-tudo {
+            border: 1px dashed blue;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .region-member {
+            border: 1px dashed green;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .region-member table, .region-member table td, .region-member table th {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .region-index {
+            border: 1px dashed orange;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body ng-app="app-shop">
+    <h1>Hello AngularJs</h1>
+    <div ng-controller="shopController" class="region-1">
+        <h2>Vùng được áp dụng AngularJs {{title}}</h2>
+        <p>Tổng tiền: <b style="color: red;">{{sum}}</b></p>
+    </div>
+
+    <div class="region-member" ng-controller="memberController">
+        <h5>Member's information</h5>
+        <p>Name: {{member.name}}</p>
+        <p>Age: {{member.age}}</p>
+        <p>Address: {{member.address}}</p>
+
+        <h4>List users</h4>
+        <table>
+            <thead>
+                <td>Name</td>
+                <td>Age</td>
+                <td>Address</td>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users">
+                    <td>{{user.name}}</td>
+                    <td>{{user.age}}</td>
+                    <td>{{user.address}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="region-index">
+        <p>Vùng không ai quản lí</p>
+    </div>
+
+    <!-- AngularJs -->
+    <script src="vendor/angular.min.js"></script>
+    <script src="main.js"></script>
+    <script>
+        var app = angular.module("app-shop", []);
+        app.controller("shopController", function($scope) {
+            $scope.title = "Chào bạn shop";
+            $scope.sum = 1000;
+        });
+
+        app.controller("memberController", function($scope) {
+            $scope.member = {
+                name: "Nguyễn Văn A",
+                age: 20,
+                address: "Hà Nội"
+            }
+
+            $scope.users = [
+                {name: "Nguyễn Văn A", age: 20, address: "Hà Nội"},
+                {name: "Nguyễn Văn B", age: 21, address: "Hà Nội"},
+                {name: "Nguyễn Văn C", age: 22, address: "Hà Nội"},
+            ]
+        });
+    </script>
+</body>
+</html>

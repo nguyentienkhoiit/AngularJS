@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body ng-app="myApp">
+    <div ng-include="'component/header.html'"></div>
+
+    <div ng-controller="indexController">
+        <div class="menu">
+            <a href="#!introduction">Introduction</a>
+            <a href="#!contact">Contact</a>
+        </div>
+        <div class="main-content" ng-view></div>
+    </div>
+
+    <div copy-right></div>
+    <div ng-include="'component/footer.html'"></div>
+
+    <!-- AngularJs -->
+    <script src="vendor/angular.min.js"></script>
+    <script src="vendor/angular-route.min.js"></script>
+    <script>
+        var app = angular.module("myApp", ["ngRoute"]);
+
+        app.directive("copyRight", function() {
+            return {
+                restrict: "AE",
+                template: "<h3>Copy Right</h3>"
+            };
+        });
+
+        app.config(function($routeProvider) {
+            $routeProvider
+                .when("/introduction", {
+                    templateUrl: "introduction.html"
+                })
+                .when("/contact", {
+                    templateUrl: "/contact.html"
+                })
+                .otherwise({
+                    redirectTo: "/index.html"
+                });
+        });
+
+        app.controller("indexController", function($scope) {
+            
+        });
+    </script>
+</body>
+</html>

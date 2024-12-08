@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body ng-app="myApp">
+    <div ng-include="'component/header.html'"></div>
+
+    <div ng-controller="loginController" class="container">
+        <form ng-submit="login()">
+            <div>
+                <label for="username">Username</label>
+                <input type="text" ng-model="username" ng-change="inputChanged()">
+                <span style="color: red;" ng-show="inputStarted && (username == '' || username.length < 6)">Username không được để trống và phải lớn hơn 6 ký tự</span>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" ng-model="password" ng-change="inputChanged()">
+                <span style="color: red;" ng-show="inputStarted && (password == '' || password.length < 6)">Password không được để trống và phải lớn hơn 6 ký tự</span>
+            </div>
+            <button>Login</button>
+            <span style="color: green;" ng-show="status && check">Đăng nhập thành công</span>
+            <span style="color: red;" ng-show="!status && check">Đăng nhập thất bại</span>
+        </form>
+
+        <div class="main-content">
+            <div>
+                <h1>Welcome to AngularJS</h1>
+            </div>
+        </div>
+    </div>
+
+    <div ng-include="'component/footer.html'"></div>
+
+    <!-- AngularJs -->
+    <script src="vendor/angular.min.js"></script>
+    <script src="vendor/angular-route.min.js"></script>
+    <script>
+        var app = angular.module("myApp", ["ngRoute"]);
+        app.controller("loginController", function($scope) {
+            $scope.username = '';
+            $scope.password = '';
+
+            $scope.check = false;
+            $scope.status = false;
+            $scope.inputStarted = false;
+
+            $scope.inputChanged = function() {
+                $scope.inputStarted = true;
+            };
+
+            $scope.login = function() {
+                this.check = true;
+                if(this.username == 'adminn' && this.password == '123456') {
+                    this.status = true;
+                } else {
+                    this.status = false;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
