@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body ng-app="myApp">
+    <div ng-include="'layouts/header.html'"></div>
+
+    <div id="main-content" ng-view></div>
+
+    <div ng-include="'layouts/footer.html'"></div>
+
+    <script src="vendor/angular.min.js"></script>
+    <script src="vendor/angular-route.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

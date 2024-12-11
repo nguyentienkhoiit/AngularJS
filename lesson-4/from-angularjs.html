@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/form-angularjs.css">
+</head>
+<body ng-app="myApp">
+    <div ng-include="'component/header.html'"></div>
+
+    <div ng-controller="registerController">
+        <form name="registerForm" ng-submit="submit()" method="post" novalidate>
+                <label for="">Name</label>
+                <input type="text" name="name" ng-model="name" ng-required="true" 
+                ng-minlength="3" ng-maxlength="10"/>
+                <div ng-show="registerForm.name.$error">
+                    <div ng-show="registerForm.name.$error.required">The name is required</div>
+                    <div ng-show="registerForm.name.$error.minlength">The minimum length is 3</div>
+                    <div ng-show="registerForm.name.$error.maxlength">The maximum length is 10</div>
+                </div>
+            </div>
+            <div>
+                <label for="">Age</label>
+                <input type="text" name="age" ng-model="age"/>
+            </div>
+            <div>
+                <label for="">Username</label>
+                <input type="text" name="username" ng-model="username"/>
+            </div>
+            <div>
+                <label for="">Password</label>
+                <input type="password" name="password" ng-model="password"/>
+            </div>
+            <div class="checkbox">
+                <input type="checkbox" name="showPassword"/>
+                <label for="">Show password</label>
+            </div>
+            <div>
+                <label for="">Email</label>
+                <input type="text" name="email" ng-model="email"/>
+            </div>
+            <div>
+                <button ng-disabled="registerForm.$invalid" type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+
+    <div ng-include="'component/footer.html'"></div>
+
+    <!-- AngularJs -->
+    <script src="vendor/angular.min.js"></script>
+    <script src="vendor/angular-route.min.js"></script>
+    <script>
+        var app = angular.module("myApp", ["ngRoute"]);
+
+        var registerController = app.controller("registerController", function($scope) {
+            $scope.name = "";
+            $scope.age = "";
+            $scope.username = "";
+            $scope.password = "";
+            $scope.email = "";
+
+            $scope.submit = function() {
+                console.log($scope.registerForm.$valid);
+                if($scope.registerForm.$valid) {
+                    alert("Form is valid");
+                } else {
+                    alert("Form is invalid");
+                }
+
+                $scope.registerForm.$setPristine(); // Reset form state
+                $scope.registerForm.$setUntouched(); // Reset form touch state
+            }
+        });
+    </script>
+</body>
+</html>
